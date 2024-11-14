@@ -1,8 +1,5 @@
-yfinance
-streamlit
-plotly
-numpy
-plotly.graph_objects
-datetime
-pandas
-timedelta
+streamlit==1.40.0
+yfinance==0.2.49
+plotly==5.24.1
+numpy==1.24.2
+pandas==1.5.3
