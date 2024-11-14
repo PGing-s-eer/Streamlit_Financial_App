@@ -1,0 +1,8 @@
+yfinance
+streamlit
+plotly
+numpy
+plotly.graph_objects
+datetime
+pandas
+timedelta
