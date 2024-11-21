@@ -31,76 +31,49 @@ for i, tab in enumerate(menu_tabs):
             st.session_state.menu = tab
 menu = st.session_state.menu
 
-#Initialization of s&p 500 tickers 
-sp500_tickers = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NVDA', 'META', 'BRK.B', 'JNJ', 'V',
-    'UNH', 'XOM', 'JPM', 'PG', 'CVX', 'HD', 'LLY', 'MA', 'PFE', 'ABBV',
-    'PEP', 'KO', 'MRK', 'BAC', 'COST', 'TMO', 'DIS', 'AVGO', 'WMT', 'CSCO',
-    'ADBE', 'NKE', 'VZ', 'CMCSA', 'TXN', 'NFLX', 'CRM', 'INTC', 'AMD', 'LIN',
-    'ABT', 'QCOM', 'BMY', 'NEE', 'PM', 'RTX', 'HON', 'AMGN', 'T', 'MDT', 'UPS',
-    'GS', 'UNP', 'MS', 'ORCL', 'CVS', 'SCHW', 'PLD', 'DHR', 'CAT', 'TGT',
-    'AXP', 'LOW', 'DE', 'BA', 'BKNG', 'SPGI', 'AMT', 'C', 'MMM', 'SYK',
-    'ISRG', 'MDLZ', 'ADP', 'CI', 'EL', 'MO', 'LMT', 'CB', 'ZTS', 'BSX',
-    'WM', 'USB', 'DUK', 'PNC', 'SO', 'TFC', 'NOW', 'GE', 'EQIX', 'CCI',
-    'AON', 'GILD', 'PGR', 'ITW', 'VRTX', 'ICE', 'NSC', 'REGN', 'HUM', 'TRV',
-    'HCA', 'ADSK', 'EW', 'ETN', 'KLAC', 'ECL', 'FDX', 'AEP', 'PSA', 'GD',
-    'SHW', 'CME', 'MCO', 'SNPS', 'ILMN', 'MAR', 'IDXX', 'APD', 'CSX', 'MPC',
-    'TT', 'ROST', 'STZ', 'LRCX', 'CMG', 'SRE', 'CTAS', 'FTNT', 'F', 'SPG',
-    'AIG', 'MET', 'ALL', 'PRU', 'AFL', 'PFG', 'A', 'AMCR', 'ACGL', 'AEE',
-    'AES', 'AJG', 'AKAM', 'ALB', 'ALGN', 'ALLE', 'AMP', 'ABC', 'AME', 'ANET',
-    'APA', 'APTV', 'ARE', 'ATO', 'ANSS', 'BALL', 'BAX', 'BBWI', 'BEN', 'BIO',
-    'BK', 'BKR', 'BXP', 'CAG', 'CARR', 'CDNS', 'CINF', 'CL', 'CLX', 'CNP',
-    'COF', 'COO', 'CPB', 'CRL', 'CSGP', 'CTLT', 'CTVA', 'D', 'DAL', 'DD',
-    'DG', 'DGX', 'DHI', 'DISH', 'DLR', 'DOV', 'DPZ', 'DRE', 'DTE', 'DVA',
-    'DXC', 'DXCM', 'EA', 'EBAY', 'EIX', 'EMN', 'EMR', 'ENPH', 'EPAM', 'EQR',
-    'ESS', 'ETR', 'EVRG', 'EXC', 'EXPD', 'EXPE', 'EXR', 'FANG', 'FAST', 'FDS',
-    'FE', 'FFIV', 'FIS', 'FISV', 'FLT', 'FMC', 'FRC', 'FTV', 'GEN', 'GNRC',
-    'GRMN', 'HAL', 'HAS', 'HBAN', 'HES', 'HIG', 'HOLX', 'HSIC', 'HST', 'HSY',
-    'HWM', 'IEX', 'IFF', 'IP', 'IPG', 'IQV', 'IR', 'IRM', 'JBHT', 'JKHY',
-    'J', 'KEY', 'KEYS', 'KHC', 'KIM', 'KMI', 'KMX', 'KDP', 'KR', 'L',
-    'LDOS', 'LEG', 'LEN', 'LH', 'LKQ', 'LNT', 'LW', 'LYB', 'MAS', 'MKC',
-    'MKTX', 'MLM', 'MTB', 'MTD', 'NDAQ', 'NDSN', 'NI', 'NOC', 'NUE', 'NVR',
-    'OGN', 'OKE', 'OMC', 'ON', 'ORLY', 'OTIS', 'PARA', 'PAYC', 'PAYX', 'PCAR',
-    'PKG', 'PWR', 'PH', 'PNR', 'PPG', 'PPL', 'PRGO', 'PXD', 'RCL', 'RE',
-    'RHI', 'RJF', 'RL', 'RMD', 'RNG', 'ROL', 'ROK', 'RSG', 'SBAC', 'SEDG',
-    'SEE', 'SIVB', 'SJM', 'SLB', 'SNA', 'SWK', 'SWKS', 'SYY', 'TDG', 'TECH',
-    'TER', 'TFC', 'TPR', 'TROW', 'TSCO', 'TTWO', 'TWTR', 'TXN', 'TYL', 'UAL',
-    'UHS', 'ULTA', 'USB', 'VFC', 'VLO', 'VMC', 'VRSK', 'VTR', 'VTRS', 'VZ',
-    'WAT', 'WDC', 'WEC', 'WELL', 'WFC', 'WHR', 'WMB', 'WTW', 'WY', 'WYNN',
-    'XEL', 'XYL', 'ZBH', 'ZBRA', 'ZION','AAP', 'ABMD', 'ACN', 'ADM', 'AIV', 'AKR', 'ALK', 'ALLE', 'AMZN', 'ANET',
-    'AOS', 'AWR', 'AXON', 'BKR', 'BLK', 'BRO', 'CCL', 'CHD', 'CHRW', 'CLF',
-    'CMS', 'CNP', 'CPB', 'CR', 'CSGP', 'CSX', 'CTAS', 'CZR', 'DD', 'DFS',
-    'DHR', 'DISCK', 'DOV', 'DPZ', 'DRI', 'EOG', 'EPD', 'ES', 'ETR', 'FANG',
-    'FRT', 'GL', 'GLW', 'GNRC', 'HBI', 'HPE', 'HRB', 'HRL', 'IEX', 'IFF',
-    'ILMN', 'IP', 'IPGP', 'IT', 'J', 'JCI', 'JNPR', 'JWN', 'K', 'KMB',
-    'KSU', 'LDOS', 'LEN.B', 'LHX', 'LNT', 'LOW', 'LRCX', 'LW', 'LYV', 'MCD',
-    'MCK', 'MKTX', 'MOH', 'MSCI', 'NEM', 'NOC', 'NTAP', 'NVR', 'OKE', 'OMC',
-    'ORLY', 'OTIS', 'PENN', 'PHM', 'PXD', 'QRVO', 'RCL', 'RHI', 'RJF', 'ROK',
-    'ROL', 'ROST', 'SBAC', 'SEDG', 'SEE', 'SHW', 'SIVB', 'SNA', 'SRE', 'STE',
-    'STT', 'SYF', 'TAP', 'TDY', 'TECH', 'TER', 'TFC', 'TROW', 'TXG', 'UAA',
-    'UAL', 'UDR', 'URI', 'VTRS', 'WAB', 'WBA', 'WEC', 'WELL', 'WMT', 'WRK',
-    'WU', 'WY', 'XRX', 'YUM', 'ZBRA']
+# Initialisation des tickers du S&P 500
+@st.cache_data
+def list_wikipedia_sp500() -> pd.DataFrame:
+    url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+    sp500_table = pd.read_html(url)[0]
+    sp500_table.set_index('Symbol', inplace=True)  # Utiliser les tickers comme index
+    return sp500_table
 
-# Under-Header with Ticker Selection and Upload Button
-col_header1, col_header2, col_header3 = st.columns([2, 1, 1])    # St.column to divide.
-with col_header1: # Selected Stock title
-    stock_data = st.session_state.stock_data
-    st.markdown(f"<h2 style='text-align: left; color: black;'>Selected Stock : {stock_data.info.get('longName', 'N/A')}</h2>", unsafe_allow_html=True)
+# Charger les tickers
+if 'ticker_list' not in st.session_state:
+    df_ticker = list_wikipedia_sp500()
+    st.session_state.ticker_list = sorted(df_ticker.index.to_list())  # Liste triée
 
-with col_header2:       # Upload button
-    st.markdown("<style>div.stButton > button {width: 100%; height: 50px; font-size: 18px;}</style>", unsafe_allow_html=True)
-    if st.button("Upload Data"):
+# Diviser la page en 3 colonnes
+col_header1, col_header2, col_header3 = st.columns([2, 1, 1])
+
+with col_header1:
+    stock_data = st.session_state.get('stock_data', None)
+    if stock_data:
+        st.markdown(
+            f"<h2 style='text-align: left; color: black;'>Selected Stock: "
+            f"{stock_data.info.get('longName', 'N/A')}</h2>",
+            unsafe_allow_html=True
+        )
+
+with col_header2:
+    st.markdown(
+        "<style>div.stButton > button {width: 100%; height: 50px; font-size: 18px;}</style>",
+        unsafe_allow_html=True
+    )
+    if st.button("Upload Data") and 'selected_ticker' in st.session_state:
         st.session_state.stock_data = yf.Ticker(st.session_state.selected_ticker)
 
-with col_header3:       #Stock Selectbox 
+with col_header3:
     selected_ticker_temp = st.selectbox(
         "Select a Stock",
-        sp500_tickers, index=sp500_tickers.index(st.session_state.selected_ticker),
+        st.session_state.ticker_list,
+        index=st.session_state.ticker_list.index(st.session_state.selected_ticker)
+        if 'selected_ticker' in st.session_state else 0
     )
-    if selected_ticker_temp != st.session_state.selected_ticker:
+    if selected_ticker_temp != st.session_state.get('selected_ticker', None):
         st.session_state.selected_ticker = selected_ticker_temp
-
-
-
+        st.session_state.stock_data = yf.Ticker(selected_ticker_temp)
 
 # Function to update date range based on the selected period 
 def update_dates(period):
@@ -340,7 +313,7 @@ if st.session_state.stock_data is not None:
         with col_selectbox:                                         # 2nd SelectBox for comparison
             selected_ticker_2 = st.selectbox(
                 "Select a stock to compare",
-                sp500_tickers,
+                st.session_state.ticker_list,
                 index=0  
             )
 
@@ -555,7 +528,7 @@ if st.session_state.stock_data is not None:
             st.subheader("Step 2: Select the stocks for your portfolio")
             selected_stocks = []            #Initialisation of the list
             for i in range(num_stocks):
-                stock = st.selectbox(f"Select Stock {i + 1}", sp500_tickers, key=f"stock_{i}")
+                stock = st.selectbox(f"Select Stock {i + 1}", st.session_state.ticker_list, key=f"stock_{i}")
                 selected_stocks.append(stock) #Adding the selected stock to the list
 
 
