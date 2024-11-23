@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 import numpy as np
 import pandas as pd
 
-# Configuration de la page
 st.set_page_config(layout="wide")
 
 # Initialize session state variables
@@ -31,7 +30,7 @@ for i, tab in enumerate(menu_tabs):
             st.session_state.menu = tab
 menu = st.session_state.menu
 
-# Initialisation des tickers du S&P 500
+# S&P 500 initialisation
 @st.cache_data
 def list_wikipedia_sp500() -> pd.DataFrame:
     url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
@@ -39,12 +38,12 @@ def list_wikipedia_sp500() -> pd.DataFrame:
     sp500_table.set_index('Symbol', inplace=True)  # Utiliser les tickers comme index
     return sp500_table
 
-# Charger les tickers
+# Load tickers
 if 'ticker_list' not in st.session_state:
     df_ticker = list_wikipedia_sp500()
     st.session_state.ticker_list = sorted(df_ticker.index.to_list())  # Liste triée
 
-# Diviser la page en 3 colonnes
+# Subsettinh the page in 3 columns
 col_header1, col_header2, col_header3 = st.columns([2, 1, 1])
 
 with col_header1:
@@ -266,7 +265,7 @@ if st.session_state.stock_data is not None:
                 prices.append(price_change)
             simulation_results.append(prices)
 
-        # Calculer la VaR à 95%  
+        # VaR calculation (95%)  
         final_prices = [simulation[-1] for simulation in simulation_results]
         VaR_95 = np.percentile(final_prices, 5)
 
@@ -305,7 +304,7 @@ if st.session_state.stock_data is not None:
     if menu == "Comparison":    # Comparison Page
        
 
-        # Affichage dans les colonnes
+        
         col_title, col_selectbox = st.columns([1, 1])               # Dividing the page in two columns
         with col_title:
             st.markdown(f"<h2 style='text-align: left; color: black;'>Compared Stock : </h2>", unsafe_allow_html=True)
@@ -379,7 +378,7 @@ if st.session_state.stock_data is not None:
         sharpe_ratio_1 = mean_return_1 / volatility_1
         sharpe_ratio_2 = mean_return_2 / volatility_2
 
-        # Créer le graphique comparatif
+        # Comparison Line Chart
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=data_1.index, y=data_1['Close'], mode='lines', name=f"{st.session_state.selected_ticker} Close"))
         fig.add_trace(go.Scatter(x=data_2.index, y=data_2['Close'], mode='lines', name=f"{selected_ticker_2} Close"))
